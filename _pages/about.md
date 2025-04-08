@@ -20,4 +20,4 @@ PhD student at TTU:
 
 Links
 ======
-(https://inspirehep.net/authors/2896585)
+[Inspire HEP page](https://inspirehep.net/authors/2896585)
