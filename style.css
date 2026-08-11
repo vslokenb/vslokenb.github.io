@@ -1,0 +1,248 @@
+/* ─────────────────────────────────────────────
+   Palette — warm browns on pastel cream.
+   Change these six values to re-tint the site.
+   ───────────────────────────────────────────── */
+:root {
+  --paper:      #faf6ef;  /* page background   */
+  --card:       #f4ece0;  /* raised surfaces   */
+  --blush:      #ecdcd4;  /* pastel accent     */
+  --sage:       #dfe4d7;  /* second accent     */
+  --ink:        #4a3a2c;  /* body text (brown) */
+  --ink-soft:   #8a7663;  /* secondary text    */
+  --rule:       #e2d5c4;  /* hairlines         */
+  --link:       #8a5a3c;  /* link brown        */
+
+  --measure: 40rem;       /* comfortable reading width */
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "EB Garamond", Garamond, "Times New Roman", serif;
+  font-size: 1.175rem;
+  line-height: 1.65;
+  font-feature-settings: "onum" 1, "kern" 1;
+}
+
+.wrap {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 5rem;
+}
+
+/* ── Typography ─────────────────────────────── */
+
+h1, h2, h3 {
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+}
+
+h1 {
+  font-size: 2.6rem;
+  margin: 0 0 0.15em;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin: 0 0 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+  font-variant-caps: small-caps;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+h3 { font-size: 1.2rem; margin: 0 0 0.3rem; }
+
+p { max-width: var(--measure); }
+
+a {
+  color: var(--link);
+  text-decoration-color: var(--blush);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+a:hover { text-decoration-color: var(--link); }
+
+.muted { color: var(--ink-soft); font-size: 0.95em; }
+
+/* ── Intro ──────────────────────────────────── */
+
+.intro {
+  display: flex;
+  gap: 2.25rem;
+  align-items: flex-start;
+  margin-bottom: 3.5rem;
+}
+
+.portrait {
+  flex: 0 0 12rem;
+  width: 12rem;
+  height: 14.5rem;
+  object-fit: cover;
+  border-radius: 3px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  box-shadow: 0 2px 12px rgba(74, 58, 44, 0.08);
+}
+
+.intro-text { min-width: 0; }
+
+.tagline {
+  margin: 0 0 1.2rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  font-size: 1.15rem;
+}
+
+.contact {
+  margin-top: 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+}
+.contact a {
+  font-variant-caps: small-caps;
+  letter-spacing: 0.05em;
+}
+
+/* ── Wide photo ─────────────────────────────── */
+
+.wide-photo { margin: 0 0 3.5rem; }
+
+.wide-photo img {
+  width: 100%;
+  max-height: 26rem;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid var(--rule);
+  background: var(--card);
+  display: block;
+}
+
+figcaption {
+  margin-top: 0.6rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+/* ── Sections ───────────────────────────────── */
+
+section { margin-bottom: 3.5rem; }
+
+.section-note {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 0 0 1.25rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.35rem 1.1rem;
+  background: var(--blush);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  color: var(--ink);
+  text-decoration: none;
+  font-variant-caps: small-caps;
+  letter-spacing: 0.06em;
+}
+.button:hover { background: var(--sage); }
+
+/* ── CV embed ───────────────────────────────── */
+
+.pdf-frame {
+  height: 40rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--card);
+  overflow: hidden;
+}
+.pdf-frame object { width: 100%; height: 100%; }
+
+.fallback { padding: 2rem; text-align: center; color: var(--ink-soft); }
+
+/* ── Recent ─────────────────────────────────── */
+
+.updates { list-style: none; margin: 0; padding: 0; }
+
+.updates li {
+  display: flex;
+  gap: 1.25rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.updates li:last-child { border-bottom: 0; }
+
+.date {
+  flex: 0 0 5.5rem;
+  color: var(--ink-soft);
+  font-variant-caps: small-caps;
+  letter-spacing: 0.04em;
+}
+
+.entry { min-width: 0; }
+
+/* ── Link cards ─────────────────────────────── */
+
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+
+.link-card {
+  padding: 1.1rem 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.link-card:hover {
+  background: var(--blush);
+  transform: translateY(-1px);
+}
+.link-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+/* ── Footer ─────────────────────────────────── */
+
+footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+footer p { margin: 0; }
+
+/* ── Narrow screens ─────────────────────────── */
+
+@media (max-width: 34rem) {
+  .wrap { padding: 2.5rem 1.25rem 3.5rem; }
+
+  .intro {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .portrait { width: 10rem; height: 12rem; flex-basis: auto; }
+
+  h1 { font-size: 2.1rem; }
+
+  .pdf-frame { height: 28rem; }
+
+  .updates li { flex-direction: column; gap: 0.15rem; }
+  .date { flex-basis: auto; }
+}

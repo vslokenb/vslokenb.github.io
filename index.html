@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Name</title>
+<meta name="description" content="Personal site of Your Name.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="wrap">
+
+  <!-- ───────────── Intro: photo + bio ───────────── -->
+  <header class="intro">
+    <img class="portrait" src="assets/photo-1.jpg" alt="Portrait of Your Name">
+    <div class="intro-text">
+      <h1>Your Name</h1>
+      <p class="tagline">Short descriptor — role, field, or affiliation</p>
+      <p>
+        Write your bio here. Two or three sentences is usually plenty: what you
+        work on, what you're curious about, and where you are. Keep it in your
+        own voice rather than a résumé summary.
+      </p>
+      <p>
+        A second paragraph if you want one — current projects, research
+        interests, or what you're reading lately.
+      </p>
+      <p class="contact">
+        <a href="mailto:you@example.com">Email</a>
+        <a href="https://github.com/vslokenb">GitHub</a>
+        <a href="https://scholar.google.com/">Scholar</a>
+        <a href="https://www.linkedin.com/">LinkedIn</a>
+      </p>
+    </div>
+  </header>
+
+  <!-- ───────────── Second photo ─────────────
+       Optional. Delete this whole <figure> block if you only want one photo. -->
+  <figure class="wide-photo">
+    <img src="assets/photo-2.HEIC" alt="Describe this photo">
+    <figcaption>A caption for the second photo — where it was taken, or why it's here.</figcaption>
+  </figure>
+
+  <!-- ───────────── CV ───────────── -->
+  <section id="cv">
+    <h2>CV</h2>
+    <p class="section-note">
+      <a class="button" href="assets/cv.pdf" download>Download PDF</a>
+      <span class="muted">Last updated August 2026</span>
+    </p>
+    <div class="pdf-frame">
+      <object data="assets/cv.pdf#view=FitH" type="application/pdf">
+        <p class="fallback">
+          Your browser can't display the embedded PDF.
+          <a href="assets/cv.pdf">Open the CV in a new tab</a> instead.
+        </p>
+      </object>
+    </div>
+  </section>
+
+  <!-- ───────────── Recent ───────────── -->
+  <section id="recent">
+    <h2>Recent</h2>
+    <ul class="updates">
+      <li>
+        <span class="date">Aug 2026</span>
+        <span class="entry">
+          Something that happened — a talk, a paper, a new job, a project going
+          live. <a href="#">Link</a> if there is one.
+        </span>
+      </li>
+      <li>
+        <span class="date">Jun 2026</span>
+        <span class="entry">Another update. Newest first works best here.</span>
+      </li>
+      <li>
+        <span class="date">Mar 2026</span>
+        <span class="entry">And another.</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ───────────── Links ───────────── -->
+  <section id="links">
+    <h2>Elsewhere</h2>
+    <div class="link-grid">
+
+      <article class="link-card">
+        <h3><a href="https://example.com">A project or paper</a></h3>
+        <p>One line on what it is and why someone should click.</p>
+      </article>
+
+      <article class="link-card">
+        <h3><a href="https://example.com">Something you wrote</a></h3>
+        <p>Essays, notes, a blog — whatever you want to point at.</p>
+      </article>
+
+      <article class="link-card">
+        <h3><a href="https://example.com">Something you like</a></h3>
+        <p>Reading lists, tools, people whose work you admire.</p>
+      </article>
+
+      <article class="link-card">
+        <h3><a href="https://example.com">A fourth thing</a></h3>
+        <p>Duplicate or delete these cards freely — the grid reflows.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© <span id="year">2026</span> Your Name · Built with plain HTML and CSS</p>
+  </footer>
+
+</main>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
