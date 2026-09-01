@@ -114,6 +114,27 @@
     </div>
   </section>
 
+  <section id="treadmill">
+    <div class="treadmill-card">
+      <svg id="tm-svg" viewBox="60 40 150 120" role="img" aria-label="Running stick figure">
+        <g id="tm-runner">
+          <polyline id="tm-arm-far"/>
+          <polyline id="tm-leg-far"/>
+          <line id="tm-torso"/>
+          <circle id="tm-head" r="7"/>
+          <polyline id="tm-leg-near"/>
+          <polyline id="tm-arm-near"/>
+        </g>
+      </svg>
+      <div class="treadmill-controls">
+        <button id="tm-run" class="button" type="button">Run</button>
+        <input id="tm-speed" type="range" min="0.4" max="2.2" step="0.05" value="1" aria-label="Pace">
+        <span id="tm-pace" class="muted">8:00 /mi</span>
+      </div>
+      <p id="tm-clicks" class="muted tm-count" aria-live="polite">n_clicks = 0</p>
+    </div>
+  </section>
+
   <footer>
     <p>© <span id="year">2026</span> V. Slokenbergs · Built with plain HTML and CSS</p>
   </footer>
@@ -121,5 +142,100 @@
 </main>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+<script>
+(function () {
+  const $ = id => document.getElementById(id);
+  const head = $('tm-head'), torso = $('tm-torso'),
+        legN = $('tm-leg-near'), legF = $('tm-leg-far'),
+        armN = $('tm-arm-near'), armF = $('tm-arm-far'),
+        slider = $('tm-speed'), paceOut = $('tm-pace'),
+        runBtn = $('tm-run'), clicksOut = $('tm-clicks');
+
+  const HIP_X = 118, TORSO = 30, THIGH = 26, SHIN = 24, UARM = 17, FARM = 15;
+  let speed = parseFloat(slider.value);
+  let phase = 0, last = performance.now();
+  let running = false, stopAt = 0;
+  const RUN_MS = 10000;
+  const reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let nClicks = 0;
+  try { nClicks = parseInt(localStorage.getItem('tm-clicks'), 10) || 0; } catch (e) {}
+  function showClicks() { clicksOut.textContent = 'n_clicks = ' + nClicks; }
+  showClicks();
+
+  function setPts(el, arr) {
+    el.setAttribute('points', arr.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' '));
+  }
+  function setLine(el, a, b) {
+    el.setAttribute('x1', a[0].toFixed(1)); el.setAttribute('y1', a[1].toFixed(1));
+    el.setAttribute('x2', b[0].toFixed(1)); el.setAttribute('y2', b[1].toFixed(1));
+  }
+
+  function leg(hip, p) {
+    const hipA = 0.85 * Math.sin(p);
+    const bend = 0.35 + 0.95 * Math.max(0, Math.sin(p - 0.9));
+    const knee = [hip[0] + THIGH * Math.sin(hipA), hip[1] + THIGH * Math.cos(hipA)];
+    const shinA = hipA - bend;
+    const foot = [knee[0] + SHIN * Math.sin(shinA), knee[1] + SHIN * Math.cos(shinA)];
+    return [hip, knee, foot];
+  }
+  function arm(sh, p) {
+    const a = -0.75 * Math.sin(p);
+    const elbow = [sh[0] + UARM * Math.sin(a), sh[1] + UARM * Math.cos(a)];
+    const fa = a + 1.9;
+    const hand = [elbow[0] + FARM * Math.sin(fa), elbow[1] + FARM * Math.cos(fa)];
+    return [sh, elbow, hand];
+  }
+
+  function draw(p, s) {
+    const lean = 0.12 + 0.08 * s;
+    const hip = [HIP_X, 97.5 + 2.2 * Math.sin(2 * p)];
+    const neck = [hip[0] + TORSO * Math.sin(lean), hip[1] - TORSO * Math.cos(lean)];
+    setLine(torso, hip, neck);
+    head.setAttribute('cx', (neck[0] + 9 * Math.sin(lean)).toFixed(1));
+    head.setAttribute('cy', (neck[1] - 9 * Math.cos(lean)).toFixed(1));
+    const sh = [neck[0], neck[1] + 4];
+    setPts(legN, leg(hip, p));
+    setPts(legF, leg(hip, p + Math.PI));
+    setPts(armN, arm(sh, p + Math.PI));
+    setPts(armF, arm(sh, p));
+  }
+
+  function paceLabel(s) {
+    const sec = Math.round(480 / s);
+    return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0') + ' /mi';
+  }
+  paceOut.textContent = paceLabel(speed);
+
+  function tick(now) {
+    const dt = Math.min((now - last) / 1000, 0.05);
+    last = now;
+    if (running && now >= stopAt) running = false;
+    if (running) phase -= dt * (4.5 + 4.5 * speed);
+    draw(phase, speed);
+    requestAnimationFrame(tick);
+  }
+
+  slider.addEventListener('input', () => {
+    speed = parseFloat(slider.value);
+    paceOut.textContent = paceLabel(speed);
+  });
+
+  runBtn.addEventListener('click', () => {
+    nClicks++;
+    try { localStorage.setItem('tm-clicks', String(nClicks)); } catch (e) {}
+    showClicks();
+    if (!reduced) {
+      running = true;
+      last = performance.now();
+      stopAt = last + RUN_MS;
+    }
+  });
+
+  draw(0.8, speed);
+  if (!reduced) requestAnimationFrame(tick);
+})();
+</script>
 </body>
 </html>

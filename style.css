@@ -217,6 +217,55 @@ section { margin-bottom: 3.5rem; }
   font-size: 1rem;
 }
 
+/* ── Treadmill ──────────────────────────────── */
+
+.treadmill-card {
+  padding: 1.25rem 1.25rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+}
+
+#tm-svg {
+  display: block;
+  width: 100%;
+  max-width: 13rem;
+  margin: 0 auto;
+}
+
+#tm-runner {
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+#tm-head { fill: var(--ink); stroke: none; }
+#tm-arm-far, #tm-leg-far { stroke: var(--ink-soft); }
+
+.treadmill-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+.treadmill-controls input[type="range"] {
+  flex: 1;
+  min-width: 8rem;
+  accent-color: var(--link);
+}
+#tm-pace {
+  font-variant-numeric: tabular-nums;
+  min-width: 5.5rem;
+}
+
+.tm-count {
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  margin: 0.6rem 0 0;
+}
+
 /* ── Footer ─────────────────────────────────── */
 
 footer {
